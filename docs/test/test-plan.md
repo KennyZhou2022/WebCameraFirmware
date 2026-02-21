@@ -139,3 +139,23 @@ screen /dev/tty.usbserial-XXXX 2000000
 1. All P0/P1 critical functional tests pass.
 2. No unresolved critical reliability defects.
 3. Soak test shows stable behavior and recoverability.
+
+## Phase 1 Verification Checklist
+
+1. `camera_adapter` frame pull:
+1. Confirm non-zero frame length is returned when camera is running.
+2. Confirm status transitions: `NOT_READY` before start, `OK` after start.
+
+2. `frame_broker` publish/read:
+1. Publish one frame and confirm `frame_id` increments.
+2. Read latest frame and validate size/metadata match published values.
+3. Confirm `STATUS_ERR_NO_MEMORY` when frame exceeds broker capacity.
+
+3. Legacy entry replacement:
+1. Invoke `mhttp_server_init()` and confirm `live_http_mjpeg_is_started()` becomes true.
+2. Confirm repeated invocation does not crash or regress state.
+
+4. End-to-end tick path:
+1. Call `app_main_init()` then `app_main_start()`.
+2. Run `app_main_tick()` loop.
+3. Confirm broker receives frames and `live_http_mjpeg_tick()` returns non-error.

@@ -321,3 +321,8 @@ Phase 5:
 `docs/test/test-plan.md`
 5. Foundation ADR:
 `docs/adr/ADR-0001-phase0-foundation.md`
+
+## 17. Phase 1 Artifacts
+
+1. Phase 1 wiring summary:
+`docs/architecture/phase-1.md`
